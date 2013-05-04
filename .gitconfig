@@ -1,0 +1,9 @@
+[user]
+	name = Zhibin Huang
+	email = benjaminhuang1@gmail.com
+[core]
+	whitespace = space-before-tab,indent-with-non-tab,trailing-space
+[format]
+	pretty = oneline
+[apply]
+	whitespace = fix
