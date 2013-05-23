@@ -94,7 +94,9 @@ function parse_git_dirty() {
 }
 
 function parse_git_branch() {
-	if ! [[ "$PWD" == *".gvfs"* ]]; then
+	if [[ `stat -fc%t:%T .` = *cifs* ]]; then
+		echo ''
+	else
 		git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \(\1\)$(parse_git_dirty)/"
 	fi
 }
