@@ -62,6 +62,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision 'shell', inline: @zsh
   config.vm.provision 'shell', inline: @docker
+  config.vm.provision 'shell', inline: @shipyard
   config.vm.provision 'shell', inline: @tmux
   config.vm.provision 'shell', inline: @symlink
 
