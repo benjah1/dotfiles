@@ -34,13 +34,18 @@ ln -s /vagrant/.zshrc /home/vagrant/.zshrc
 ln -s /vagrant/.tmux.conf /home/vagrant/.tmux.conf
 SCRIPT
 
+@cleanup = <<SCRIPT
+echo "dd if=/dev/zero of=/bigemptyfile bs=4096k" > /home/vagrant/cleanup.sh
+echo "rm -rf /bigemptyfile" >> /home/vagrant/cleanup.sh
+chmod +x /home/vagrant/cleanup.sh
+SCRIPT
 
 Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.provider "virtualbox" do |vb|
-     vb.customize ['modifyvm', :id, "--memory", "1024"]
+     vb.customize ['modifyvm', :id, "--memory", "2048"]
      vb.customize ['modifyvm', :id, "--cpus", "2"]
      vb.customize ['modifyvm', :id, "--natdnshostresolver1", "on"]
 	   vb.customize ["setextradata", :id,   "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
@@ -65,5 +70,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', inline: @shipyard
   config.vm.provision 'shell', inline: @tmux
   config.vm.provision 'shell', inline: @symlink
+  config.vm.provision 'shell', inline: @cleanup
 
 end
