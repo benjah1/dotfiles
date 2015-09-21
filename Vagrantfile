@@ -6,6 +6,10 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 
+# For China only
+@aliSource = <<SCRIPT
+sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+SCRIPT
 
 @zsh = <<SCRIPT
 apt-get update
@@ -65,6 +69,7 @@ Vagrant.configure(2) do |config|
 		owner: 'vagrant', 
 		mount_options: ['dmode=775', 'fmode=764']
 
+  config.vm.provision 'shell', inline: @aliSource
   config.vm.provision 'shell', inline: @zsh
   config.vm.provision 'shell', inline: @docker
   config.vm.provision 'shell', inline: @shipyard
