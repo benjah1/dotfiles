@@ -20,12 +20,15 @@ SCRIPT
 
 @docker = <<SCRIPT
 curl -sSL https://get.docker.com/ | sh
-docker pull benjah1/vimrc
 usermod -aG docker vagrant
 SCRIPT
 
 @shipyard = <<SCRIPT
 curl -s https://shipyard-project.com/deploy | bash -s
+SCRIPT
+
+@vimrc = <<SCRIPT
+docker pull benjah1/vimrc
 SCRIPT
 
 @tmux = <<SCRIPT
@@ -73,6 +76,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', inline: @zsh
   config.vm.provision 'shell', inline: @docker
   config.vm.provision 'shell', inline: @shipyard
+  config.vm.provision 'shell', inline: @vimrc
   config.vm.provision 'shell', inline: @tmux
   config.vm.provision 'shell', inline: @symlink
   config.vm.provision 'shell', inline: @cleanup
