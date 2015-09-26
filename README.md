@@ -7,7 +7,7 @@ My Ubuntu + Vagrant + Docker dotfiles
 Default settings,
 
 Key      | Value
------------------
+---------|-------
 CPUs     | 2
 Memory   | 2048MB
 IP       | 192.168.51.102
