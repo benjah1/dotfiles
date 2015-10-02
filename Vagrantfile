@@ -47,6 +47,12 @@ echo "rm -rf /bigemptyfile" >> /home/vagrant/cleanup.sh
 chmod +x /home/vagrant/cleanup.sh
 SCRIPT
 
+@youtube = <<SCRIPT
+mkdir /usr/local/bin -p
+curl https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl
+chmod a+rx /usr/local/bin/youtube-dl
+SCRIPT
+
 Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/trusty64"
@@ -80,5 +86,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', inline: @tmux
   config.vm.provision 'shell', inline: @symlink
   config.vm.provision 'shell', inline: @cleanup
+  config.vm.provision 'shell', inline: @youtube
 
 end
