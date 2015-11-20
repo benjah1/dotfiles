@@ -66,7 +66,9 @@ Vagrant.configure(2) do |config|
   
   config.vm.network "private_network", ip: "192.168.51.102"
   
-  config.vm.synced_folder "./default", "/home/vagrant/default/", create: true    
+  config.vm.synced_folder "./default", "/home/vagrant/default/",
+		create: true, 
+		mount_options: ['dmode=755', 'fmode=764']
 
 	config.vm.synced_folder "./rsync", "/home/vagrant/rsync",
 		create: true,
@@ -76,7 +78,7 @@ Vagrant.configure(2) do |config|
 		type: 'rsync', 
 		group: 'vagrant', 
 		owner: 'vagrant', 
-		mount_options: ['dmode=775', 'fmode=764']
+		mount_options: ['dmode=755', 'fmode=764']
 
   config.vm.provision 'shell', inline: @aliSource
   config.vm.provision 'shell', inline: @zsh
