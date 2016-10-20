@@ -49,12 +49,14 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vagrant)
+plugins=(git vagrant docker docker-compose)
 
 # User configuration
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
+# http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
+export LS_COLORS='tw=01;34:ow=01;34'
 
 source $ZSH/oh-my-zsh.sh
 
