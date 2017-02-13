@@ -87,5 +87,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias doc='cd /cygdrive/c/Users/Benjamin/Documents'
 alias vi='vim'
+alias dvim='docker run -it --rm --name=$(basename $(pwd)) -v $(pwd):/src vimrc:test'
 
 export VAGRANT_DETECTED_OS=cygwin
