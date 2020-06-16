@@ -18,10 +18,12 @@ curl -sSL https://get.docker.com/ | sh
 usermod -aG docker vagrant
 SCRIPT
 
-@kind = <<SCRIPT
+@kubernetes = <<SCRIPT
 mkdir /usr/local/bin -p
 curl -sSLo /usr/local/bin/kind https://github.com/kubernetes-sigs/kind/releases/download/v0.8.1/kind-linux-amd64
 chmod +x /usr/local/bin/kind
+curl -sSLo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+chmod +x /usr/local/bin/kubectl
 SCRIPT
 
 @tmux = <<SCRIPT
@@ -80,7 +82,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', inline: @symlink
   config.vm.provision 'shell', inline: @zsh
   config.vm.provision 'shell', inline: @docker
-  config.vm.provision 'shell', inline: @kind
+  config.vm.provision 'shell', inline: @kubernetes
   config.vm.provision 'shell', inline: @tmux
   # config.vm.provision 'shell', inline: @cleanup
   # config.vm.provision 'shell', inline: @youtube
