@@ -31,6 +31,11 @@ apt-get update
 apt-get install -y tmux
 SCRIPT
 
+@devtool = <<SCRIPT
+apt-get update
+apt-get install -y jq
+SCRIPT
+
 @symlink = <<SCRIPT
 ln -s /home/vagrant/Documents/dotfiles/dotfiles/.tmux.conf /home/vagrant/.tmux.conf
 ln -s /home/vagrant/Documents/dotfiles/dotfiles/.zshrc /home/vagrant/.zshrc
@@ -84,6 +89,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', inline: @docker
   config.vm.provision 'shell', inline: @kubernetes
   config.vm.provision 'shell', inline: @tmux
+  config.vm.provision 'shell', inline: @devtool
   # config.vm.provision 'shell', inline: @cleanup
   # config.vm.provision 'shell', inline: @youtube
 
