@@ -49,7 +49,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vagrant docker docker-compose)
+plugins=(git vagrant docker docker-compose kubectl)
 
 # User configuration
 
@@ -89,4 +89,4 @@ alias doc='cd /cygdrive/c/Users/Benjamin/Documents'
 alias vi='vim'
 alias dvim='docker run -it --rm --name=$(basename $(pwd)) -v $(pwd):/src vimrc:test'
 
-export VAGRANT_DETECTED_OS=cygwin
+source <(kubectl completion zsh)
