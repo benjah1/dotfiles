@@ -90,3 +90,7 @@ alias vi='vim'
 alias dvim='docker run -it --rm --name=$(basename $(pwd)) -v $(pwd):/src vimrc:test'
 
 source <(kubectl completion zsh)
+
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    eval `ssh-agent -s`
+fi
