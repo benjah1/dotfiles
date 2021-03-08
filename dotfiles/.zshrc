@@ -49,7 +49,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vagrant docker docker-compose kubectl)
+plugins=(gitfast vagrant docker docker-compose themes)
 
 # User configuration
 
@@ -85,11 +85,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias doc='cd /cygdrive/c/Users/Benjamin/Documents'
-alias vi='vim'
-alias dvim='docker run -it --rm --name=$(basename $(pwd)) -v $(pwd):/src vimrc:test'
+# alias doc='cd /cygdrive/c/Users/Benjamin/Documents'
+# alias vi='vim'
+# alias dvim='docker run -it --rm --name=$(basename $(pwd)) -v $(pwd):/src vimrc:test'
 
-source <(kubectl completion zsh)
+type kubectl > /dev/null && source <(kubectl completion zsh)
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent -s`
