@@ -1,0 +1,60 @@
+version: "3.9"
+services:
+  ctrl:
+    hostname: ctrl
+    build:
+      context: .
+      dockerfile: ctrl.Dockerfile
+    environment:
+      - LC_ALL=en_US.utf-8
+      - LANG=en_US.utf-8
+    privileged: true
+    networks:
+      - overlay
+    volumes:
+      - 'vol-documents:/root/Documents'
+      - 'vol-documents:/home/vagrant/Documents'
+      - 'vol-run:/var/run'
+      - 'vol-tmp:/tmp'
+    working_dir: /root/Documents
+    command: ["tail", "-f", "/dev/null"]
+
+  docker:
+    build:
+      context: .
+      dockerfile: docker.Dockerfile
+    pid: ctrl:ns
+    privileged: true
+    networks:
+      - overlay
+    volumes:
+      - 'vol-documents:/root/Documents'
+      - 'vol-documents:/home/vagrant/Documents'
+      - 'vol-run:/var/run'
+      - 'vol-tmp:/tmp'
+      # - 'vol-docker:/var/lib/docker'
+
+volumes:
+  vol-documents:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,noacl,nolock,nointr,hard,noatime,rsize=1048576,wsize=1048576,timeo=600,retrans=2
+      device: ":/System/Volumes/Data/Users/ben.huang/Documents"
+  vol-run:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  vol-tmp:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  vol-docker:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,nolock,nointr,hard,noatime
+      device: ":/System/Volumes/Data/Users/ben.huang/docker-data"
+
+networks:
+  overlay:
