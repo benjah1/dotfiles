@@ -91,6 +91,4 @@ source $ZSH/oh-my-zsh.sh
 
 type kubectl > /dev/null && source <(kubectl completion zsh)
 
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-    eval `ssh-agent -s`
-fi
+export TERM=xterm-256color
